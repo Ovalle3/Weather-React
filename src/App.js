@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Advice from "./Components/Advice";
 
 const api = {
   key: "e524db1ef051c034feea42b7104a1cc4",
@@ -10,6 +11,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [weather, setWeather] = useState({});
 
+  // Use a search function which fetches data from the OpenWeatherAPI using my key
   const search = evt => {
     if (evt.key === "Enter") {
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
@@ -22,6 +24,7 @@ function App() {
     }
   }
 
+  // Create a value which is able to retrieve the current date
   const dateBuilder = (d) => {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -59,6 +62,9 @@ function App() {
           </div>
           <div className="weather">
             {weather.weather[0].main}
+          </div>
+          <div className="advice">
+            <Advice saying = {weather.weather[0].main} />
           </div>
         </div>
           </div>
